@@ -18,11 +18,11 @@ namespace работа_8
             try
             {
                 Console.Write("Здравствуйте! Введите стоимость телефона: ");
-                int pricePhone = int.Parse(Console.ReadLine());
+                uint pricePhone = UInt.Parse(Console.ReadLine());
 
                 Console.Write("Введите сумму, которую Мария откладывает в день : ");
-                int deferredMoney = int.Parse(Console.ReadLine());
-                int sum = 0;
+                uint deferredMoney = UInt.Parse(Console.ReadLine());
+                uint sum = 0;
                 int days = 0;
                 int weekDay = 1;// 1- понедельник
 
@@ -58,4 +58,3 @@ namespace работа_8
         }
     }
 }
-
