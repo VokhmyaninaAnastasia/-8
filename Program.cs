@@ -1,7 +1,7 @@
-﻿//*****************************************************************************
-//*Практическая работа №5                                                     *
+//*****************************************************************************
+//*Практическая работа №8                                                     *
 //* Выполнила: Вохмянина А.Р., группа 2-ИСП                                   *
-//* Задание: составление программы циклической структуры: цикл с предусловием *
+//* Задание: составление программы циклической структуры: итерационный цикл   *
 //*****************************************************************************
 using System;
 
@@ -17,21 +17,21 @@ namespace работа_8
             Console.ForegroundColor = ConsoleColor.White;
             try
             {
-                Console.Write("Здравствуйте! Введите стоимость телефона N: ");
-                int N = int.Parse(Console.ReadLine());
+                Console.Write("Здравствуйте! Введите стоимость телефона: ");
+                int pricePhone = int.Parse(Console.ReadLine());
 
-                Console.Write("Введите сумму, которую Мария откладывает в день K: ");
-                int K = int.Parse(Console.ReadLine());
+                Console.Write("Введите сумму, которую Мария откладывает в день : ");
+                int deferredMoney = int.Parse(Console.ReadLine());
                 int sum = 0;
                 int days = 0;
                 int weekDay = 1;// 1- понедельник
 
-                while (sum < N)
+                while (sum < pricePhone)
                 {
                     days++;
                     if (weekDay != 6) // не суббота
                     {
-                        sum += K;
+                        sum += deferredMoney;
                     }
                     weekDay++;
                     if (weekDay > 7)
@@ -42,9 +42,17 @@ namespace работа_8
                 Console.WriteLine($"Мария накопит нужную сумму за {days} дней");
                 Console.WriteLine($"Накопленная сумма: {sum} рублей");
             }
-            catch
+            catch (ArgumentException aex)
             {
-                Console.WriteLine("Ошибка! Введите целые числа.");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Ошибка аргумента: " + aex.Message);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("Непредвиденная ошибка: " + ex.Message);
+                Console.ForegroundColor = ConsoleColor.White;
             }
             Console.ReadKey();
         }
