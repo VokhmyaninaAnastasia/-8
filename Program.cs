@@ -16,15 +16,54 @@ namespace работа_8
             bool repeat = true;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Здравствуй!");
             do
             {
                 try
                 {
-                    Console.Write("Здравствуйте! Введите стоимость телефона: ");
-                    uint pricePhone = UInt32.Parse(Console.ReadLine());
+                    uint pricePhone = 0;
 
-                    Console.Write("Введите сумму, которую Мария откладывает в день : ");
-                    uint deferredMoney = UInt32.Parse(Console.ReadLine());
+                    // Ввод стоимости телефона с проверкой на 0
+                    do
+                    {
+                        Console.Write("Введите стоимость телефона: ");
+
+                        if (!uint.TryParse(Console.ReadLine(), out pricePhone))
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("Ошибка! Введите целое неотрицательное число.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else if (pricePhone == 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("Ошибка! Стоимость телефона не может быть равна 0. Повторите ввод.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+
+                    } while (pricePhone == 0);
+
+                    uint deferredMoney = 0;
+
+                    // Ввод суммы в день с проверкой на 0
+                    do
+                    {
+                        Console.Write("Введите сумму, которую Мария откладывает в день : ");
+
+                        if (!uint.TryParse(Console.ReadLine(), out deferredMoney))
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("Ошибка! Введите целое неотрицательное число.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else if (deferredMoney == 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("Ошибка! Сумма в день не может быть равна 0. Повторите ввод.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+
+                    } while (deferredMoney == 0);
 
                     uint sum = 0;
                     int days = 0;
@@ -59,7 +98,7 @@ namespace работа_8
                     Console.Write("Непредвиденная ошибка: " + ex.Message);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-                Console.Write("\nХотите продолжить выполнять программу? (да/нет)");
+                Console.Write("\nХотите продолжить выполнять программу? (да/нет) ");
                 string answer = Console.ReadLine();
                 repeat = (answer == "да" || answer == "д");
             } while (repeat);
