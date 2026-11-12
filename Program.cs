@@ -13,47 +13,56 @@ namespace работа_8
         {
             Console.Clear();
             Console.Title = "Практическая работа 8.";
+            bool repeat = true;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
-            try
+            do
             {
-                Console.Write("Здравствуйте! Введите стоимость телефона: ");
-                uint pricePhone = UInt.Parse(Console.ReadLine());
-
-                Console.Write("Введите сумму, которую Мария откладывает в день : ");
-                uint deferredMoney = UInt.Parse(Console.ReadLine());
-                uint sum = 0;
-                int days = 0;
-                int weekDay = 1;// 1- понедельник
-
-                while (sum < pricePhone)
+                try
                 {
-                    days++;
-                    if (weekDay != 6) // не суббота
+                    Console.Write("Здравствуйте! Введите стоимость телефона: ");
+                    uint pricePhone = UInt32.Parse(Console.ReadLine());
+
+                    Console.Write("Введите сумму, которую Мария откладывает в день : ");
+                    uint deferredMoney = UInt32.Parse(Console.ReadLine());
+
+                    uint sum = 0;
+                    int days = 0;
+                    int weekDay = 1;// 1- понедельник
+
+                    while (sum < pricePhone)
                     {
-                        sum += deferredMoney;
+                        days++;
+                        if (weekDay != 6) // не суббота
+                        {
+                            sum += deferredMoney;
+                        }
+                        weekDay++;
+                        if (weekDay > 7)
+                        {
+                            weekDay = 1;
+                        }
                     }
-                    weekDay++;
-                    if (weekDay > 7)
-                    {
-                        weekDay = 1;
-                    }
+                    Console.WriteLine($"Мария накопит нужную сумму за {days} дней");
+                    Console.WriteLine($"Накопленная сумма: {sum} рублей");
                 }
-                Console.WriteLine($"Мария накопит нужную сумму за {days} дней");
-                Console.WriteLine($"Накопленная сумма: {sum} рублей");
-            }
-            catch (ArgumentException aex)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("Ошибка аргумента: " + aex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("Непредвиденная ошибка: " + ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
+
+                catch (ArgumentException aex)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("Ошибка аргумента: " + aex.Message);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                catch (Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("Непредвиденная ошибка: " + ex.Message);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                Console.Write("\nХотите продолжить выполнять программу? (да/нет)");
+                string answer = Console.ReadLine();
+                repeat = (answer == "да" || answer == "д");
+            } while (repeat);
             Console.ReadKey();
         }
     }
