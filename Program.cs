@@ -17,92 +17,91 @@ namespace работа_8
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Здравствуй!");
-            do
+            while (repeat)
             {
-                try
                 {
-                    uint pricePhone = 0;
-
-                    // Ввод стоимости телефона с проверкой на 0
-                    do
+                    try
                     {
-                        Console.Write("Введите стоимость телефона: ");
-
-                        if (!uint.TryParse(Console.ReadLine(), out pricePhone))
+                        uint pricePhone = 0;
+                        while (pricePhone == 0)
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.Write("Ошибка! Введите целое неотрицательное число.\n");
-                            Console.ForegroundColor = ConsoleColor.White;
-                        }
-                        else if (pricePhone == 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.Write("Ошибка! Стоимость телефона не может быть равна 0. Повторите ввод.\n");
-                            Console.ForegroundColor = ConsoleColor.White;
-                        }
+                            // Ввод стоимости телефона с проверкой на 0
+                            Console.Write("Введите стоимость телефона: ");
 
-                    } while (pricePhone == 0);
+                            if (!UInt32.TryParse(Console.ReadLine(), out pricePhone))
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.Write("Ошибка! Введите целое неотрицательное число.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+                            else if (pricePhone == 0)
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.Write("Ошибка! Стоимость телефона не может быть равна 0. Повторите ввод.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
 
-                    uint deferredMoney = 0;
-
-                    // Ввод суммы в день с проверкой на 0
-                    do
-                    {
-                        Console.Write("Введите сумму, которую Мария откладывает в день : ");
-
-                        if (!uint.TryParse(Console.ReadLine(), out deferredMoney))
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.Write("Ошибка! Введите целое неотрицательное число.\n");
-                            Console.ForegroundColor = ConsoleColor.White;
-                        }
-                        else if (deferredMoney == 0)
-                        {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.Write("Ошибка! Сумма в день не может быть равна 0. Повторите ввод.\n");
-                            Console.ForegroundColor = ConsoleColor.White;
                         }
 
-                    } while (deferredMoney == 0);
+                        uint deferredMoney = 0;
 
-                    uint sum = 0;
-                    int days = 0;
-                    int weekDay = 1;// 1- понедельник
+                        // Ввод суммы в день с проверкой на 0
+                        while (deferredMoney == 0)
+                        {
+                            {
+                                Console.Write("Введите сумму, которую Мария откладывает в день : ");
 
-                    while (sum < pricePhone)
-                    {
-                        days++;
-                        if (weekDay != 6) // не суббота
-                        {
-                            sum += deferredMoney;
+                                if (!UInt32.TryParse(Console.ReadLine(), out deferredMoney))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                                    Console.Write("Ошибка! Введите целое неотрицательное число.\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+                                else if (deferredMoney == 0)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                                    Console.Write("Ошибка! Сумма в день не может быть равна 0. Повторите ввод.\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+                            }
                         }
-                        weekDay++;
-                        if (weekDay > 7)
+                        uint sum = 0;
+                        int days = 0;
+                        int weekDay = 1;// 1- понедельник
+                        while (sum < pricePhone)
                         {
-                            weekDay = 1;
+                            days++;
+                            if (weekDay != 6) // не суббота
+                            {
+                                sum += deferredMoney;
+                            }
+                            weekDay++;
+                            if (weekDay > 7)
+                            {
+                                weekDay = 1;
+                            }
                         }
+                        Console.WriteLine($"Мария накопит нужную сумму за {days} дней");
+                        Console.WriteLine($"Накопленная сумма: {sum} рублей");
                     }
-                    Console.WriteLine($"Мария накопит нужную сумму за {days} дней");
-                    Console.WriteLine($"Накопленная сумма: {sum} рублей");
-                }
-
-                catch (ArgumentException aex)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Ошибка аргумента: " + aex.Message);
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                catch (Exception ex)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("Непредвиденная ошибка: " + ex.Message);
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                Console.Write("\nХотите продолжить выполнять программу? (да/нет) ");
-                string answer = Console.ReadLine();
-                repeat = (answer == "да" || answer == "д");
-            } while (repeat);
-            Console.ReadKey();
+                    catch (ArgumentException aex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("Ошибка аргумента: " + aex.Message);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("Непредвиденная ошибка: " + ex.Message);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    Console.Write("\nХотите продолжить выполнять программу? (да/нет) ");
+                    string answer = Console.ReadLine();
+                    repeat = (answer == "да" || answer == "д");
+                } while (repeat) ;
+                Console.ReadKey();
+            }
         }
     }
 }
